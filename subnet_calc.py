@@ -3,8 +3,8 @@
 subnet_calc.py - a simple IPv4 subnet calculator for network engineers.
 
 Examples:
-    python3 subnet_calc.py 192.168.1.37/26
-    python3 subnet_calc.py 10.0.0.0/24 --split 26
+    python3 subnet_calc.py IP
+    python3 subnet_calc.py IP --split 26
     python3 subnet_calc.py              (interactive mode)
 """
 
@@ -72,12 +72,12 @@ def parse_network(text: str) -> ipaddress.IPv4Network:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="IPv4 subnet calculator")
-    parser.add_argument("network", nargs="?", help="network in CIDR form, e.g. 192.168.1.0/24")
+    parser.add_argument("network", nargs="?", help="network in CIDR form, e.g. IP")
     parser.add_argument("--split", type=int, metavar="PREFIX",
                         help="split the network into subnets with this prefix length")
     args = parser.parse_args()
 
-    text = args.network or input("Enter network (e.g. 192.168.1.0/24): ").strip()
+    text = args.network or input("Enter network (e.g. IP): ").strip()
     net = parse_network(text)
 
     print()
